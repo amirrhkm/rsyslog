@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  sacrificial_lamb:
+    image: alpine:latest
+    command: sh -c "while true; do sleep 300; done"
+    deploy:
+      replicas: 3
