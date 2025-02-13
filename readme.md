@@ -10,6 +10,7 @@ apt install rsyslog -y
 
 ```bash
 ufw allow 514/tcp
+ss -tuln | grep 514
 ```
 
 ### Configuration
