@@ -1,0 +1,117 @@
+receivers:
+  syslog:
+    endpoint: 0.0.0.0:514
+    transport: tcp
+
+processors:
+  attributes:
+    actions:
+      - key: environment
+        value: ${env:ENVIRONMENT}
+        action: upsert
+  resource:
+    attributes:
+      - key: site.name
+        value: ${env:SITE_NAME}
+        action: upsert
+      - key: site.id
+        value: ${env:ROID}
+        action: upsert
+      - key: region
+        value: ${env:REGION}
+        action: upsert
+      - key: district
+        value: ${env:DISTRICT}
+        action: upsert
+      - key: state
+        value: ${env:STATE}
+        action: upsert
+      - key: position
+        value: POINT (${env:LONGITUDE} ${env:LATITUDE})
+        action: upsert
+  resourcedetection:
+    detectors:
+      - env
+      - system
+    override: true
+    system:
+      resource_attributes:
+        host.arch:
+          enabled: true
+        host.name:
+          enabled: true
+        host.id:
+          enabled: true
+        host.ip:
+          enabled: true
+        host.mac:
+          enabled: true
+        host.cpu.vendor.id:
+          enabled: true
+        host.cpu.family:
+          enabled: true
+        host.cpu.model.id:
+          enabled: true
+        host.cpu.model.name:
+          enabled: true
+        host.cpu.stepping:
+          enabled: true
+        host.cpu.cache.l2.size:
+          enabled: true
+        os.description:
+          enabled: true
+        os.type:
+          enabled: true
+  metricstransform:
+    transforms:
+      - include: system.cpu.load_average.1m
+        action: update
+        new_name: hub.cpu.load
+      - include: system.memory.usage
+        action: update
+        new_name: hub.memory.usage
+      - include: system.memory.limit
+        action: update
+        new_name: hub.memory.limit
+      - include: system.memory.utilization
+        action: update
+        new_name: hub.memory.utilization
+      - include: system.filesystem.usage
+        action: update
+        new_name: hub.disk.usage
+      - include: system.filesystem.utilization
+        action: update
+        new_name: hub.disk.utilization
+      - include: system.network.connections
+        action: update
+        new_name: hub.network.connections
+      - include: system.network.dropped
+        action: update
+        new_name: hub.network.dropped
+      - include: system.network.errors
+        action: update
+        new_name: hub.network.errors
+      - include: system.network.io
+        action: update
+        new_name: hub.network.io
+      - include: system.network.packets
+        action: update
+        new_name: hub.network.packets
+  batch:
+    send_batch_size: 512
+    send_batch_max_size: 1024
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    logs:
+      receivers:
+        - syslog
+      processors:
+        - resourcedetection
+        - batch
+      exporters:
+        - debug

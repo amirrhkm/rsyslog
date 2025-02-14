@@ -1,8 +1,37 @@
 version: "3.8"
 
 services:
-  sacrificial_lamb:
-    image: alpine:latest
-    command: sh -c "while true; do sleep 300; done"
-    deploy:
-      replicas: 3
+  # sacrificial_lamb:
+  #   image: alpine:latest
+  #   command: sh -c "while true; do sleep 300; done"
+  #   deploy:
+  #     replicas: 3
+
+  otel-collector:
+    container_name: op-otel-collector
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/etc/otelcol.yaml"]
+    volumes:
+      - ./otelcol.yaml:/etc/otelcol.yaml
+      - ${LOGS_PATH}/hub-gw-info.log:/var/log/hub-gw-info.log
+      - ${LOGS_PATH}/hub-worker.log:/var/log/hub-worker.log
+      - ${LOGS_PATH}/hub-gw-debug.log:/var/log/hub-gw-debug.log
+      - /:/hostfs
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - SITE_NAME=${OUTLET_NAME}
+      - ROID=${OUTLET_ID}
+      - REGION=${OUTLET_REGION}
+      - DISTRICT=${OUTLET_DISTRICT}
+      - STATE=${OUTLET_STATE}
+      - LATITUDE=${OUTLET_LATITUDE}
+      - LONGITUDE=${OUTLET_LONGITUDE}
+    depends_on:
+      - data-prepper
+    privileged: true
+    ports:
+      - "8889:8889"
+      - "4317:4317"
+      - "4318:4318"
+    networks:
+      - observability
