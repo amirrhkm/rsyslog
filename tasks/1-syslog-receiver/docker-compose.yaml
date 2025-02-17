@@ -1,0 +1,92 @@
+version: "3.8"
+
+services:
+  # sacrificial_lamb:
+  #   image: alpine:latest
+  #   command: sh -c "while true; do sleep 300; done"
+  #   deploy:
+  #     replicas: 3
+
+  otel-collector:
+    container_name: op-otel-collector
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/etc/otelcol.conf.yaml"]
+    volumes:
+      - ./otelcol.conf.yaml:/etc/otelcol.conf.yaml
+      - /:/hostfs
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - SITE_NAME=${OUTLET_NAME}
+      - ROID=${OUTLET_ID}
+      - REGION=${OUTLET_REGION}
+      - DISTRICT=${OUTLET_DISTRICT}
+      - STATE=${OUTLET_STATE}
+      - LATITUDE=${OUTLET_LATITUDE}
+      - LONGITUDE=${OUTLET_LONGITUDE}
+    privileged: true
+    ports:
+      - "514:514"
+    networks:
+      - observability
+
+  data-prepper:
+    image: opensearchproject/data-prepper:latest
+    container_name: op-data-prepper
+    volumes:
+      - ./dataprepper.conf.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml
+    depends_on:
+      - opensearch
+      - opensearch-dashboards
+    ports:
+      - 21890:21890
+      - 21891:21891
+      - 21892:21892
+      - 4900:4900
+    networks:
+      - observability
+
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    container_name: op-opensearch
+    environment:
+      - cluster.name=opensearch-cluster 
+      - node.name=opensearch 
+      - discovery.seed_hosts=opensearch 
+      - cluster.initial_cluster_manager_nodes=opensearch
+      - bootstrap.memory_lock=true 
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" 
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - "DISABLE_SECURITY_PLUGIN=true" 
+    ulimits:
+      memlock:
+        soft: -1 
+        hard: -1
+      nofile:
+        soft: 65536 
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data 
+    ports:
+      - 9200:9200
+      - 9600:9600 
+    networks:
+      - observability
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:latest
+    container_name: op-opensearch-dashboards
+    ports:
+      - 5601:5601
+    expose:
+      - "5601" 
+    environment:
+      - 'OPENSEARCH_HOSTS=["http://opensearch:9200"]'
+      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true" 
+    networks:
+      - observability
+
+volumes:
+  opensearch-data:
+
+networks:
+  observability:

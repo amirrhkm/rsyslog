@@ -1,0 +1,92 @@
+receivers:
+  syslog:
+    tcp:
+      listen_address: "0.0.0.0:514"
+      add_attributes: true
+      encoding: "utf-8"
+    protocol: "rfc3164"
+    location: "UTC"
+    allow_skip_pri_header: true
+    enable_octet_counting: false
+    attributes:
+      collector: "otel"
+
+processors:
+  attributes:
+    actions:
+      - key: environment
+        value: ${env:ENVIRONMENT}
+        action: upsert
+  resource:
+    attributes:
+      - key: site.name
+        value: ${env:SITE_NAME}
+        action: upsert
+      - key: site.id
+        value: ${env:ROID}
+        action: upsert
+      - key: region
+        value: ${env:REGION}
+        action: upsert
+      - key: district
+        value: ${env:DISTRICT}
+        action: upsert
+      - key: state
+        value: ${env:STATE}
+        action: upsert
+      - key: position
+        value: POINT (${env:LONGITUDE} ${env:LATITUDE})
+        action: upsert
+  resourcedetection:
+    detectors:
+      - env
+      - system
+    override: true
+    system:
+      resource_attributes:
+        host.arch:
+          enabled: true
+        host.name:
+          enabled: true
+        host.id:
+          enabled: true
+        host.ip:
+          enabled: true
+        host.mac:
+          enabled: true
+        host.cpu.vendor.id:
+          enabled: true
+        host.cpu.family:
+          enabled: true
+        host.cpu.model.id:
+          enabled: true
+        host.cpu.model.name:
+          enabled: true
+        host.cpu.stepping:
+          enabled: true
+        host.cpu.cache.l2.size:
+          enabled: true
+        os.description:
+          enabled: true
+        os.type:
+          enabled: true
+  batch:
+    send_batch_size: 512
+    send_batch_max_size: 1024
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    logs:
+      receivers:
+        - syslog
+      processors:
+        - resourcedetection
+        - attributes
+        - resource
+        - batch
+      exporters:
+        - debug
