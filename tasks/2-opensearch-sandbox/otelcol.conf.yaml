@@ -1,4 +1,69 @@
 receivers:
+  filelog:
+      include:
+        - /var/log/hub-gw-info.log
+        - /var/log/hub-gw-debug.log
+        - /var/log/hub-worker.log
+      start_at: end
+      multiline:
+        line_start_pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:00\s'
+      operators:
+        - type: regex_parser
+          regex: '^(?P<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2})\s+(?P<level>\w+)\s+\[(?P<source>[^\]]+)\]\s+(?P<message>(?:.|[\r\n])*)'
+          timestamp:
+            parse_from: attributes.timestamp
+            layout_type: gotime
+            layout: '2006-01-02T15:04:05-07:00'
+          severity:
+            parse_from: attributes.level
+      include_file_name: true
+      include_file_path: true
+  hostmetrics:
+    root_path: /hostfs
+    collection_interval: 10s
+    scrapers:
+      load:
+        metrics:
+          system.cpu.load_average.15m:
+            enabled: false
+          system.cpu.load_average.5m:
+            enabled: false
+          system.cpu.load_average.1m:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.usage:
+            enabled: true
+          system.linux.memory.available:
+            enabled: false
+          system.memory.limit:
+            enabled: true
+          system.memory.utilization:
+            enabled: true
+      filesystem:
+        metrics:
+          system.filesystem.inodes.usage:
+            enabled: false
+          system.filesystem.usage:
+            enabled: true
+          system.filesystem.utilization:
+            enabled: true
+      network:
+        metrics:
+          system.network.connections:
+            enabled: true
+          system.network.dropped:
+            enabled: true
+          system.network.errors:
+            enabled: true
+          system.network.io:
+            enabled: true
+          system.network.packets:
+            enabled: true
+          system.network.conntrack.count:
+            enabled: false
+          system.network.conntrack.max:
+            enabled: false
   syslog:
     tcp:
       listen_address: "0.0.0.0:514"
@@ -77,11 +142,17 @@ processors:
 exporters:
   debug:
     verbosity: detailed
+  otlp/data-prepper-logs:
+    endpoint: op-data-prepper:21892
+    tls:
+      insecure: true
 
 service:
   pipelines:
     logs:
       receivers:
+        - filelog
+        - hostmetrics
         - syslog
       processors:
         - resourcedetection
@@ -90,3 +161,4 @@ service:
         - batch
       exporters:
         - debug
+        - otlp/data-prepper-logs

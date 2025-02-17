@@ -7,17 +7,17 @@ services:
   #   deploy:
   #     replicas: 3
 
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    restart: always
-    ports:
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-    networks:
-      - observability
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+  #   container_name: portainer
+  #   restart: always
+  #   ports:
+  #     - "9000:9000"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_data:/data
+  #   networks:
+  #     - observability
 
   otel-collector:
     container_name: op-otel-collector
@@ -25,6 +25,9 @@ services:
     command: ["--config=/etc/otelcol.conf.yaml"]
     volumes:
       - ./otelcol.conf.yaml:/etc/otelcol.conf.yaml
+      - /home/admin/hub-gw-info.log:/var/log/hub-gw-info.log
+      - /home/admin/hub-gw-debug.log:/var/log/hub-gw-debug.log
+      - /home/admin/hub-worker.log:/var/log/hub-worker.log
       - /:/hostfs
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
@@ -100,6 +103,6 @@ services:
 volumes:
   opensearch-data:
   portainer_data:
-  
+
 networks:
   observability:
