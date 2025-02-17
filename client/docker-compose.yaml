@@ -1,8 +1,28 @@
 version: "3.8"
 
 services:
-  sacrificial_lamb:
-    image: alpine:latest
-    command: sh -c "while true; do sleep 300; done"
-    deploy:
-      replicas: 3
+  # sacrificial_lamb:
+  #   image: alpine:latest
+  #   command: sh -c "while true; do sleep 300; done"
+  #   deploy:
+  #     replicas: 3
+
+  otel-collector:
+    container_name: op-otel-collector
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/etc/otelcol.conf.yaml"]
+    volumes:
+      - ./otelcol.conf.yaml:/etc/otelcol.conf.yaml
+      - /:/hostfs
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - SITE_NAME=${OUTLET_NAME}
+      - ROID=${OUTLET_ID}
+      - REGION=${OUTLET_REGION}
+      - DISTRICT=${OUTLET_DISTRICT}
+      - STATE=${OUTLET_STATE}
+      - LATITUDE=${OUTLET_LATITUDE}
+      - LONGITUDE=${OUTLET_LONGITUDE}
+    privileged: true
+    ports:
+      - "514:514"
