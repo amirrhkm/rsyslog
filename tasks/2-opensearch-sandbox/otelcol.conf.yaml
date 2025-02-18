@@ -73,6 +73,13 @@ receivers:
     location: "UTC"
     allow_skip_pri_header: true
     enable_octet_counting: false
+    operators:
+      - type: regex_parser
+        regex: '^(?P<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+[+-]\d{2}:\d{2})\s(?P<hostname>\S+)\s(?P<process>\S+):\s\[(?P<kernel_timestamp>\d+\.\d+)\]\s(?P<message>.*)'
+        timestamp:
+          parse_from: attributes.timestamp
+          layout: '%Y-%m-%dT%H:%M:%S.%f%z'
+          location: 'UTC'
     attributes:
       collector: "otel"
 
