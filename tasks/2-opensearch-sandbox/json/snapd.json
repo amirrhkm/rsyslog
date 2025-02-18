@@ -1,0 +1,74 @@
+{
+    "_index": "otlp-logs",
+    "_id": "_NtHF5UB9hHr9R1SAjBQ",
+    "_version": 1,
+    "_score": null,
+    "_source": {
+      "traceId": "",
+      "spanId": "",
+      "severityText": "info",
+      "flags": 0,
+      "time": "2025-02-18T04:17:14Z",
+      "severityNumber": 9,
+      "droppedAttributesCount": 0,
+      "serviceName": null,
+      "body": "<30>Feb 18 04:17:14 ip-10-0-0-173 snapd[404]: storehelpers.go:954: cannot refresh snap \"core20\": snap has no updates available",
+      "observedTime": "2025-02-18T04:17:14.807325269Z",
+      "schemaUrl": "https://opentelemetry.io/schemas/1.6.1",
+      "hostname": "ip-10-0-0-173",
+      "syslog_timestamp": "Feb 18 04:17:14",
+      "pid": "404",
+      "program": "snapd",
+      "priority": "30",
+      "message": "storehelpers.go:954: cannot refresh snap \"core20\": snap has no updates available",
+      "resource.attributes.region": "Selangor",
+      "log.attributes.priority": 30,
+      "log.attributes.proc_id": "404",
+      "resource.attributes.position": "POINT (-110.8752204 32.1891602)",
+      "resource.attributes.host@arch": "amd64",
+      "log.attributes.hostname": "ip-10-0-0-173",
+      "log.attributes.net@host@name": "58da95d16983",
+      "resource.attributes.district": "Bandar Baru Bangi",
+      "resource.attributes.host@mac": "[\"02-42-AC-1A-00-02\"]",
+      "log.attributes.net@peer@ip": "54.255.39.222",
+      "log.attributes.net@transport": "IP.TCP",
+      "log.attributes.environment": "staging",
+      "log.attributes.net@host@port": "514",
+      "resource.attributes.host@cpu@vendor@id": "GenuineIntel",
+      "log.attributes.message": "storehelpers.go:954: cannot refresh snap \"core20\": snap has no updates available",
+      "resource.attributes.site@name": "Amir Punya Outlet",
+      "resource.attributes.os@type": "linux",
+      "resource.attributes.site@id": 1,
+      "resource.attributes.host@cpu@stepping": "7",
+      "resource.attributes.host@cpu@cache@l2@size": 36608,
+      "resource.attributes.host@cpu@family": "6",
+      "resource.attributes.host@cpu@model@id": "85",
+      "log.attributes.appname": "snapd",
+      "resource.attributes.host@name": "58da95d16983",
+      "resource.attributes.host@cpu@model@name": "Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+      "log.attributes.collector": "rsyslog",
+      "log.attributes.net@host@ip": "172.26.0.2",
+      "log.attributes.net@peer@name": "ec2-54-255-39-222.ap-southeast-1.compute.amazonaws.com",
+      "log.attributes.facility": 3,
+      "resource.attributes.host@ip": "[\"172.26.0.2\"]",
+      "resource.attributes.os@description": "Linux 58da95d16983 6.8.0-1021-aws #23~22.04.1-Ubuntu SMP Tue Dec 10 16:50:46 UTC 2024 x86_64",
+      "resource.attributes.state": "Hulu Langat",
+      "log.attributes.net@peer@port": "45778"
+    },
+    "fields": {
+      "time": [
+        "2025-02-18T04:17:14.000Z"
+      ],
+      "observedTime": [
+        "2025-02-18T04:17:14.807Z"
+      ]
+    },
+    "highlight": {
+      "log.attributes.appname.keyword": [
+        "@opensearch-dashboards-highlighted-field@snapd@/opensearch-dashboards-highlighted-field@"
+      ]
+    },
+    "sort": [
+      1739852234807
+    ]
+  }

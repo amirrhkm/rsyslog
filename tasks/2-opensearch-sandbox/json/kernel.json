@@ -1,0 +1,72 @@
+{
+    "_index": "otlp-logs",
+    "_id": "99tHF5UB9hHr9R1SAjBP",
+    "_version": 1,
+    "_score": null,
+    "_source": {
+      "traceId": "",
+      "spanId": "",
+      "severityText": "info",
+      "flags": 0,
+      "time": "2025-02-18T04:17:13Z",
+      "severityNumber": 9,
+      "droppedAttributesCount": 0,
+      "serviceName": null,
+      "body": "<6>Feb 18 04:17:13 ip-10-0-0-173 kernel: [  322.635286] loop5: detected capacity change from 0 to 130552",
+      "observedTime": "2025-02-18T04:17:13.384265742Z",
+      "schemaUrl": "https://opentelemetry.io/schemas/1.6.1",
+      "hostname": "ip-10-0-0-173",
+      "syslog_timestamp": "Feb 18 04:17:13",
+      "program": "kernel",
+      "priority": "6",
+      "message": "[  322.635286] loop5: detected capacity change from 0 to 130552",
+      "resource.attributes.region": "Selangor",
+      "log.attributes.priority": 6,
+      "resource.attributes.position": "POINT (-110.8752204 32.1891602)",
+      "resource.attributes.host@arch": "amd64",
+      "log.attributes.hostname": "ip-10-0-0-173",
+      "log.attributes.net@host@name": "58da95d16983",
+      "resource.attributes.district": "Bandar Baru Bangi",
+      "resource.attributes.host@mac": "[\"02-42-AC-1A-00-02\"]",
+      "log.attributes.net@transport": "IP.TCP",
+      "log.attributes.net@peer@ip": "54.255.39.222",
+      "log.attributes.environment": "staging",
+      "log.attributes.net@host@port": "514",
+      "resource.attributes.host@cpu@vendor@id": "GenuineIntel",
+      "log.attributes.message": "[  322.635286] loop5: detected capacity change from 0 to 130552",
+      "resource.attributes.site@name": "Amir Punya Outlet",
+      "resource.attributes.os@type": "linux",
+      "resource.attributes.site@id": 1,
+      "resource.attributes.host@cpu@stepping": "7",
+      "resource.attributes.host@cpu@cache@l2@size": 36608,
+      "resource.attributes.host@cpu@family": "6",
+      "resource.attributes.host@cpu@model@id": "85",
+      "log.attributes.appname": "kernel",
+      "resource.attributes.host@name": "58da95d16983",
+      "resource.attributes.host@cpu@model@name": "Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz",
+      "log.attributes.collector": "rsyslog",
+      "log.attributes.net@host@ip": "172.26.0.2",
+      "log.attributes.net@peer@name": "ec2-54-255-39-222.ap-southeast-1.compute.amazonaws.com",
+      "log.attributes.facility": 0,
+      "resource.attributes.host@ip": "[\"172.26.0.2\"]",
+      "resource.attributes.os@description": "Linux 58da95d16983 6.8.0-1021-aws #23~22.04.1-Ubuntu SMP Tue Dec 10 16:50:46 UTC 2024 x86_64",
+      "resource.attributes.state": "Hulu Langat",
+      "log.attributes.net@peer@port": "45778"
+    },
+    "fields": {
+      "time": [
+        "2025-02-18T04:17:13.000Z"
+      ],
+      "observedTime": [
+        "2025-02-18T04:17:13.384Z"
+      ]
+    },
+    "highlight": {
+      "program.keyword": [
+        "@opensearch-dashboards-highlighted-field@kernel@/opensearch-dashboards-highlighted-field@"
+      ]
+    },
+    "sort": [
+      1739852233384
+    ]
+  }
