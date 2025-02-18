@@ -1,0 +1,14 @@
+2025-01-13T05:03:27+08:00 INFO [FuelDeliveryCompletedListener] Receiving fuel completion for pump [8] _id [6780defaa7f1a56c8b6003ff] id [2440] originCode [30] limit [0] amount [0] volume [0] grade [23 - Fuel Save 95]
+2025-01-13T05:03:27+08:00 INFO [JOB] Processing JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e1fa7f1a56c8b688d83]
+2025-01-13T05:03:27+08:00 INFO [JOB] JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e1fa7f1a56c8b688d83] has been successfully processed!
+2025-01-13T05:03:42+08:00 INFO [FuelDeliveryCompletedListener] Receiving fuel completion for pump [1] _id [676ea19da7f1a56c8b2e5ab6] id [2379] originCode [30] limit [0] amount [0] volume [0] grade [23 - Fuel Save 95]
+2025-01-13T05:03:42+08:00 INFO [JOB] Processing JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e2ea7f1a56c8b688da8]
+2025-01-13T05:03:42+08:00 INFO [JOB] JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e2ea7f1a56c8b688da8] has been successfully processed!
+2025-01-13T05:03:57+08:00 INFO [FuelDeliveryCompletedListener] Receiving fuel completion for pump [8] _id [6780defaa7f1a56c8b6003ff] id [2440] originCode [30] limit [0] amount [0] volume [0] grade [23 - Fuel Save 95]
+2025-01-13T05:03:57+08:00 INFO [JOB] Processing JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e3da7f1a56c8b688dcd]
+2025-01-13T05:03:57+08:00 INFO [JOB] JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e3da7f1a56c8b688dcd] has been successfully processed!
+2025-01-13T05:04:12+08:00 INFO [FuelDeliveryCompletedListener] Receiving fuel completion for pump [1] _id [676ea19da7f1a56c8b2e5ab6] id [2379] originCode [30] limit [0] amount [0] volume [0] grade [23 - Fuel Save 95]
+2025-01-13T05:04:12+08:00 INFO [FuelDeliveryCompletedListener] Receiving fuel completion for pump [1] _id [676ea19da7f1a56c8b2e5ab6] id [2379] originCode [30] limit [0] amount [0] volume [0] grade [23 - Fuel Save 95]
+2025-01-13T05:04:12+08:00 INFO [FuelDeliveryCompletedListener] Receiving fuel completion for pump [1] _id [676ea19da7f1a56c8b2e5ab6] id [2379] originCode [30] limit [0] amount [0] volume [0] grade [23 - Fuel Save 95]
+2025-01-13T05:03:42+08:00 INFO [JOB] Processing JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e2ea7f1a56c8b688da8]
+2025-01-13T05:03:42+08:00 INFO [JOB] Processing JOB [ORDER_FINALISE_FUEL_ITEM] _id [67842e2ea7f1a56c8b688da8]

@@ -25,9 +25,9 @@ services:
     command: ["--config=/etc/otelcol.conf.yaml"]
     volumes:
       - ./otelcol.conf.yaml:/etc/otelcol.conf.yaml
-      - /home/admin/hub-gw-info.log:/var/log/hub-gw-info.log
-      - /home/admin/hub-gw-debug.log:/var/log/hub-gw-debug.log
-      - /home/admin/hub-worker.log:/var/log/hub-worker.log
+      - ./logs/hub-gw-info.log:/var/log/hub-gw-info.log
+      - ./logs/hub-gw-debug.log:/var/log/hub-gw-debug.log
+      - ./logs/hub-worker.log:/var/log/hub-worker.log
       - /:/hostfs
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
