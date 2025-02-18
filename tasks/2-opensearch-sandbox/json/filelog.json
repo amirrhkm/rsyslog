@@ -1,0 +1,78 @@
+{
+    "_index": "otlp-logs-000001",
+    "_id": "2VXaF5UB4cds8_lXRwYw",
+    "_version": 1,
+    "_score": null,
+    "_source": {
+      "traceId": "",
+      "spanId": "",
+      "droppedAttributesCount": 0,
+      "serviceName": null,
+      "schemaUrl": "https://opentelemetry.io/schemas/1.6.1",
+      
+      "flags": 0,
+      "severityText": "INFO",
+      "severityNumber": 9,
+      
+      "time": "2025-02-18T06:58:45Z",
+      "observedTime": "2025-02-18T06:58:45.811155699Z",
+
+      "body": "2025-02-18T14:58:45+08:00 INFO [JOB] JOB [ORDER_FINALISE_FUEL_ITEM] _id [67b42fa4c0eb7f86b3e10271] has been successfully processed!",
+      
+      "attributes": {
+        // otelcol processor - resource.attributes
+        "resource.attributes.site@id": 3,   
+        "resource.attributes.site@name": "Amir Punya Outlet",
+        "resource.attributes.state": "Hulu Langat",
+        "resource.attributes.region": "Selangor",
+        "resource.attributes.position": "POINT (-110.8752204 32.1891602)",
+        "resource.attributes.district": "Bandar Baru Bangi",
+
+        // otelcol processor - resourcedetection.system
+        "resource.attributes.os@type": "linux",
+        "resource.attributes.os@description": "Linux ae542df96142 5.15.0-131-generic #141-Ubuntu SMP Fri Jan 10 21:18:28 UTC 2025 x86_64",
+        "resource.attributes.host@name": "ae542df96142",
+        "resource.attributes.host@arch": "amd64",
+        "resource.attributes.host@mac": "[\"02-42-AC-13-00-02\"]",
+        "resource.attributes.host@ip": "[\"172.19.0.2\"]",
+        "resource.attributes.host@cpu@vendor@id": "GenuineIntel",
+        "resource.attributes.host@cpu@stepping": "1",
+        "resource.attributes.host@cpu@cache@l2@size": 8192,
+        "resource.attributes.host@cpu@family": "6",
+        "resource.attributes.host@cpu@model@id": "140",
+        "resource.attributes.host@cpu@model@name": "11th Gen Intel(R) Core(TM) i5-1145G7 @ 2.60GHz",
+        
+        "resource.attributes.node@name": "i-0c9ecc002f729f142",
+        "resource.attributes.k8s@pod@ip": "100.96.13.57",
+
+        // otelcol processor - attributes
+        "log.attributes.environment": "staging",
+        
+        // otelcol receiver - filelog
+        "log.attributes.message": "JOB [ORDER_FINALISE_FUEL_ITEM] _id [67b42fa4c0eb7f86b3e10271] has been successfully processed!",
+        "log.attributes.log@file@name": "hub-gw-info.log",
+        "log.attributes.source": "JOB",
+        "log.attributes.level": "INFO",
+        "log.attributes.log@file@path": "/var/log/hub-gw-info.log",
+        "log.attributes.timestamp": "2025-02-18T14:58:45+08:00"
+      },
+      "s3": {
+        "bucket": "monitoring-storage-shell-staging",
+        "key": "logs/2025/02/18/events-2025-02-18T06-58-52Z-1739861932109353936-724aaf05-2051-495d-a0c9-56cae68882ae.json.gz"
+      }
+    },
+    "fields": {
+      "observedTime": [
+        "2025-02-18T06:58:45.811Z"
+      ],
+      "attributes.log.attributes.timestamp": [
+        "2025-02-18T06:58:45.000Z"
+      ],
+      "time": [
+        "2025-02-18T06:58:45.000Z"
+      ]
+    },
+    "sort": [
+      1739861925811
+    ]
+  }
