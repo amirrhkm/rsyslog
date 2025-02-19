@@ -6,11 +6,12 @@
 apt install rsyslog -y
 ```
 
-### Open Ports
+### Common Commands
 
 ```bash
 ufw allow 514/tcp
 ss -tuln | grep 514
+sysctl -w vm.max_map_count=262144
 ```
 
 ### Configuration
