@@ -11,10 +11,7 @@ otel-logs-pipeline:
     - grok:
         match:
           body:
-            # Pattern for filelog (hub-gw logs)
-            - "%{TIMESTAMP_ISO8601:log_timestamp} %{LOGLEVEL:level} \\[%{DATA:source}\\] %{GREEDYDATA:message}"
-            # Pattern for syslog (RFC3164)
-            - "<%{POSINT:priority}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{HOSTNAME:hostname} %{DATA:program}(?:\\[%{POSINT:pid}\\])?: %{GREEDYDATA:message}"
+            - "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} \\[%{DATA:source}\\](?:\\s+\\[(?:%{NUMBER:pid}|-)\\])?\\s+%{GREEDYDATA:message}"  
   sink:
     - opensearch:
         hosts: ["http://opensearch:9200"]
